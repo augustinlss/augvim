@@ -1,133 +1,113 @@
-<h1 align="center">My neovim config</h3>
+# Neovim Configuration
 
-![Wed Apr 17 01:46:12 PM CEST 2024](https://github.com/ErdajtSopjani/nvim/assets/120386306/ecba5ffb-63f6-4ba3-a12e-3d52c8c4b6ec)
+This repository contains my personal Nevim configuration, minimalistic and focused on productivity.
 
-<a name="readme-top"></a>
+## Installation
+
+To install this configuration, follow these steps:
+
+1.  **Backup your existing Neovim configuration (optional but recommended):**
+    ```bash
+    mv ~/.config/nvim ~/.config/nvim_backup
+    mv ~/.local/share/nvim ~/.local/share/nvim_backup
+    ```
+
+2.  **Clone this repository:**
+    ```bash
+    git clone https://github.com/augustinlassus/nvim.git ~/.config/nvim
+    ```
+
+3.  **Start Neovim:**
+    Open Neovim. It will automatically install the necessary plugins using `lazy.nvim`.
+
+## Structure
+
+The configuration is organized as follows:
+
+-   `init.lua`: The main entry point for the Neovim configuration.
+-   `lua/autocommands.lua`: Contains various autocommands for automating tasks.
+-   `lua/config/`: Directory for general configuration settings.
+-   `lua/keymaps.lua`: Defines custom keybindings.
+-   `lua/plugins/`: Manages all Neovim plugins.
+    -   `lua/plugins/core/`: Core plugins for essential functionality.
+    -   `lua/plugins/ui/`: Plugins related to the user interface and aesthetics.
+    -   `lua/plugins/utils/`: Utility plugins.
+-   `lua/settings.lua`: General Neovim settings.
+
+## Key Features
+
+-   **Plugin Management:** Uses `lazy.nvim` for efficient and declarative plugin management.
+-   **Custom Keybindings:** Personalized keymaps for common actions and workflows.
+-   **Modular Configuration:** Organized into logical files for easy maintenance and understanding.
+-   **UI Enhancements:** (Details can be added based on specific UI plugins in `lua/plugins/ui/`)
+-   **Productivity Tools:** (Details can be added based on specific core/utility plugins)
+-   **Smart Diagnostics:** Integrated diagnostic tools for real-time error and warning feedback.
+-   **Efficient Navigation:** Quick and intuitive movement between windows and buffers.
+
+## Keybindings
+
+Here's a list of some of the most important keybindings:
+
+| Keybinding      | Description                               |
+| :-------------- | :---------------------------------------- |
+| `<leader>k`     | Open file explorer                        |
+| `<leader>fg`    | Grep (live_grep) with Telescope           |
+| `<leader><leader>`| Find Files with Telescope                 |
+| `<leader>ha`    | Add file to Harpoon                       |
+| `<leader>hl`    | Toggle Harpoon quick menu                 |
+| `<leader>hr`    | Clear files from Harpoon                  |
+| `<C-e>`         | Toggle Harpoon quick menu                 |
+| `<leader>n`     | Go to next Harpoon file                   |
+| `<leader>p`     | Go to previous Harpoon file               |
+| `<leader>ce`    | Enable Copilot                            |
+| `<leader>cd`    | Disable Copilot                           |
+| `mfr`           | Find and replace with Spectre             |
+| `mg`            | Open Neogit                               |
+| `mc`            | Open Neogit commit                        |
+| `<leader><space>`| Telescope Find Files (Snacks)            |
+| `<leader>,`     | Buffers (Snacks)                          |
+| `<leader>sg`    | Grep (Snacks)                             |
+| `<leader>gb`    | Git Branches (Snacks)                     |
+| `<leader>gl`    | Git Log (Snacks)                          |
+| `<leader>gs`    | Git Status (Snacks)                       |
+| `<leader>us`     | Toggle Spelling (Snacks)                  |
+| `<leader>uw`     | Toggle Wrap (Snacks)                      |
+| `<leader>uL`    | Toggle Relative Number (Snacks)           |
+| `<leader>ud`    | Toggle Diagnostics (Snacks)               |
+| `<leader>ul`    | Toggle Line Number (Snacks)               |
+| `<leader>uc`    | Toggle Conceallevel (Snacks)              |
+| `<leader>uT`    | Toggle Treesitter (Snacks)                |
+| `<leader>ub`    | Toggle Dark Background (Snacks)           |
+| `<leader>uh`    | Toggle Inlay Hints (Snacks)               |
+| `<leader>ug`    | Toggle Indent (Snacks)                    |
+| `<leader>uD`    | Toggle Dim (Snacks)                       |
+
+## Plugins
+
+This configuration leverages several powerful plugins to enhance the Neovim experience:
+
+-   **Telescope:** A highly extensible fuzzy finder over lists. Used for finding files, grepping, and more.
+-   **Harpoon:** A simple but powerful tool for quickly navigating between important files.
+-   **Copilot:** AI-powered code suggestions directly in your editor.
+-   **Spectre:** A search and replace tool across multiple files.
+-   **Neogit:** A Magit-inspired Git client for Neovim.
+-   **Snacks:** A collection of useful utilities and toggles for various Neovim features.
+-   **Gitsigns:** Displays git diffs in the sign column and provides other git-related features.
+-   **Nvim-autopairs:** Automatically closes brackets, quotes, etc.
+-   **Nvim-ts-autotag:** Automatically closes HTML/XML tags.
+-   **Comment.nvim:** A plugin for commenting out lines easily.
+-   **Conform.nvim:** An autoformatter for various languages.
+-   **Todo-comments.nvim:** Highlights and lists todo comments in your codebase.
+-   **Mini.icons:** Provides file icons for better visual navigation.
+-   **Vim-dadbod-ui:** A UI for interacting with SQL databases.
 
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-
-![Wed Apr 17 01:48:52 PM CEST 2024](https://github.com/ErdajtSopjani/nvim/assets/120386306/159dbad1-026a-4241-9886-b5de52311a73)
-
-<h2 align="center">NOTE: my config has been rewritten. for the old version go to: <a href="https://github.com/ErdajtSopjani/nvim/tree/old">Old branch</a>
-
-  <p align="center">
-    My personal neovim config with all my plugins and shortcuts
-    <br />
-    <br />
-    ·
-    <a href="https://github.com/ErdajtSopjani/nvim/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/ErdajtSopjani/nvim/issues">Request Feature</a>
-  </p>
-</div>
-
-
-<!-- ABOUT THE PROJECT -->
-## About
-
-![Wed Apr 17 02:25:58 PM CEST 2024](https://github.com/ErdajtSopjani/nvim/assets/120386306/86f3e3e4-de63-4729-94df-5a7b68026b78)
-
-Everyone needs their own setup or tweak to the software they use everyday, to guarantee productivity and most importantly ***fun*** while working/coding.
-
-This is just my config with these features
-* Language servers (LSP)'s
-* Custom transparency keybinds, for tiling wm users. ```<Leader>+t+t``` to toggle transparency
-* Custom terminal shortcuts to open terminals inside the editor in 3 possible places. ```<Alt>+1 or <Alt>+2 or <Alt>+3```
-* Telescope as a fuzzyfinder to quickly navigate through your codebase. ```<Leader>+s``` to see all available shortcuts
-* Bufferlines and Bufferwindows for better awareness while coding.
-* Nvimtree as the file *"tree"* for devs that are used to that. ```<Leader>+e``` to toggle it
-* Different colorschemes with a shortcut to switch between them. ```<Leader>+t+h```
-
-The Leader key is set to space
-
-And alot more features that help you improve your productivity.
-I'm not suggesting you to use my config! 
-
-I'm suggesting you make your own, If you don't know how to get started check out: 
-    [Kickstarter.nvim](https://github.com/nvim-lua/kickstart.nvim).
-It's how I started this config too as you can see in the commit history.
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-![Wed Apr 17 01:49:05 PM CEST 2024](https://github.com/ErdajtSopjani/nvim/assets/120386306/cc97b281-bddf-4e8e-b553-08f8d2b12c5b)
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-Although I recommend you to make your own config,
-Here are a couple of steps you can follow to get started with using nvim
-
-### Installation
-
-1. Make sure you have neovim installed: [Read more about it here](https://github.com/neovim/neovim/blob/master/INSTALL.md)
-
-2. Clone my config
-
-   ```sh
-      git clone https://github.com/ErdajtSopjani/nvim
-   ```
-   
-3. Make sure you have the necessary tools/languages installed for the LSP's here is the command for arch-based distros:
-   ```sh
-     sudo pacman -S nodejs clang python3 dotnet-sdk lua
-   ```
-   
-5. Run neovim and let lazy install the plugins
-   ```sh
-     nvim
-   ```
-   
-![Wed Apr 17 02:05:25 PM CEST 2024](https://github.com/ErdajtSopjani/nvim/assets/120386306/ec5ec858-d0b2-447e-afe8-102e22dc0d7e)
-
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-For the new dashboard, install: `gh ext install meiji163/gh-notify`
-
-<!-- USAGE EXAMPLES -->
 ## Usage
 
-If your're not familiar with vim/neovim and you want to get started open up neovim ```nvim``` and run ```:Tutor```.
-This will open up a window that will guide you through vim bindings: 
+Once installed, simply open `nvim` in your terminal. The configuration will load automatically.
 
-![Wed Apr 17 02:14:02 PM CEST 2024](https://github.com/ErdajtSopjani/nvim/assets/120386306/a09e7840-f9ae-4c57-b613-ff9262c38bd8)
+Feel free to explore the `lua/` directory to understand and customize the configuration to your liking.
 
+## Contributing
 
-If you want more info on the keybinds you can press SPACE as it's set as the main key.
-And a plugin called which key will guide you through the shortcuts:
-
-![Wed Apr 17 02:03:49 PM CEST 2024](https://github.com/ErdajtSopjani/nvim/assets/120386306/87342ac1-2eca-4599-accd-f387e06c8566)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-
-<!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/ErdajtSopjani/nvim?style=for-the-badge
-[contributors-url]: https://github.com/ErdajtSopjani/nvim/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/ErdajtSopjani/nvim?style=for-the-badge
-[forks-url]: https://github.com/ErdajtSopjani/nvim/network/members
-[stars-shield]: https://img.shields.io/github/stars/ErdajtSopjani/nvim?style=for-the-badge
-[stars-url]: https://github.com/ErdajtSopjani/nvim/stargazers
-[issues-shield]: https://img.shields.io/github/issues/ErdajtSopjani/nvim?style=for-the-badge
-[issues-url]: https://github.com/ErdajtSopjani/nvim/issues
-[Bootstrap.com]: https://img.shields.io/github/languages/top/ErdajtSopjani/nvim?color=purple&style=for-the-badge
-[Bootstrap-url]: https://dotnet.microsoft.com/en-us/download
+If you have suggestions or find issues, please open an issue or pull request on the GitHub repository.
